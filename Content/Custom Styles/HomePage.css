@@ -125,3 +125,9 @@ input:focus-visible {
     padding: 10px;
     border-radius: 20px;
 }
+
+.modal-dialog {
+    height: 90%;
+    display: flex;
+    align-items: center;
+}

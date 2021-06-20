@@ -21,5 +21,12 @@ namespace Chat_Messenger.Controllers
 
             return View();
         }
+
+        public ActionResult RegisterLoginModal()
+        {
+            //ViewBag.Title = "Home Page";
+
+            return View();
+        }
     }
 }

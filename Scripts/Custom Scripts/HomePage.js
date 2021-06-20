@@ -78,7 +78,38 @@ function getUserChat(userID) {
     }
 }
 
+function openModal() {
+    $("#modal-exhibit").load("RegisterLoginModal");
+}
+
+function showModal() {
+    $("#registerModal").modal('show');
+}
+
+function establishConnection() {
+    $.ajax({
+        url: window.location.origin + '/api/account/register',
+        headers: {
+            'content-type': 'application/json; charset=utf8'
+        },
+        method: 'POST',
+        data: JSON.stringify({
+            'UserName': $('#userName').val(),
+            'Email': $('#userName').val() + "@noreply.com",
+            'Password': $('#password').val()
+        }),
+        success: function () {
+            // do nothing at the moment.
+        },
+        error: function (jqXHR) {
+            $("#divError").text(jqXHR.responseText);
+        }
+    });
+}
+
 $(document).ready(() => {
     getAllUserChats();
     getUserChat();
-})
+    //openModal();
+    showModal();
+});

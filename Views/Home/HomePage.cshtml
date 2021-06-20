@@ -10,11 +10,12 @@
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="~/Content/bootstrap.css" />
     <link rel="stylesheet" href="~/Content/Custom Styles/HomePage.css" />
-    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
     <script type="text/javascript" src="~/Scripts/Custom Scripts/HomePage.js"></script>
     <title>HomePage</title>
 </head>
-<body>
+<body onload="showModal()">
     <div class="container-fluid">
         <div class="dflex h-100vh">
             <div class="left-panel">
@@ -91,6 +92,41 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div id="modal-exhibit">
+            <div class="modal fade" tabindex="-1" id="registerModal"
+                 data-keyboard="false" data-backdrop="static">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                &times;
+                            </button>
+                            <h4 class="modal-title">Enter Credentials</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <label>User Name</label>
+                                <input id="userName" type="text" class="form-control" />
+                                <label>Password</label>
+                                <input id="password" type="password" class="form-control" />
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success"
+                                    data-dismiss="modal" onclick="establishConnection()">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Bootstrap alert to display any validation errors-->
+            <div id="divError" class="alert alert-danger collapse">
+                <a id="linkClose" href="#" class="close">&times;</a>
+                <div id="divErrorText"></div>
+            </div>
+
         </div>
     </div>
 </body>
