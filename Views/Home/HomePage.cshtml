@@ -1,0 +1,97 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" href="~/Content/Custom Styles/HomePage.css" />
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/Custom Scripts/HomePage.js"></script>
+    <title>HomePage</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="dflex h-100vh">
+            <div class="left-panel">
+                <table class="w-100p" id="custom-table">
+                    <tbody id="custom-table-body1">
+                        <tr>
+                            <td style="padding: 3px; border-bottom: 1px solid grey">
+                                <div class="card-body dflex">
+                                    <div class="img-circle fake-img"></div>
+                                    <div class="dflexcol card-details">
+                                        <h3 class="custom-margin-block">Test Name</h3>
+                                        <label>Some random text message!</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="right-panel">
+                <div class="card-header" style="background-color: green;">
+                    <div class="card-content dflex" style="padding: 5px 7px; border-bottom: 1px solid grey">
+                        <div class="img-circle fake-img" style="flex: 3%;"></div>
+                        <div class="dflexcol card-details" style="flex: 90%;">
+                            <h3 class="custom-margin-block">Test Name</h3>
+                            <label>Some random text message!</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" style="background-color: white; height: 100%; overflow: auto;">
+                    <table class="w-100p">
+                        <tbody id="custom-table-body2">
+                            <tr>
+                                <td colspan="2" style="display: flex; justify-content: flex-end;">
+                                    <div class="custom-card-body">
+                                        <span>Hello! Whatsup!?</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="display: flex; justify-content: flex-start;">
+                                    <div class="custom-card-body">
+                                        Hey there! Nothing much
+                                    </div>
+                                </td>
+                            </tr>                            
+                            <tr>
+                                <td colspan="2" style="display: flex; justify-content: flex-start;">
+                                    <div class="custom-card-body">
+                                        How about you!?
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    @*<ul>
+                        <li>
+                            Hello! Whatsup!?
+                        </li>
+                        <li>
+                            Hey there! Nothing much
+                        </li>
+                        <li>
+                            How about you!?
+                        </li>
+                    </ul>*@
+                </div>
+                <div class="card-footer" style="height: 78px;">
+                    <div class="container-fluid p-2" style="height: 100%;">
+                        <div class="dflex custom-inputdiv" style="height: 100%; padding: 6px;">
+                            <input type="text" class="custom-inputtextbox" />
+                            <button type="button" class="btn-default btn custom-button">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

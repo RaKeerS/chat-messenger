@@ -1,0 +1,127 @@
+﻿body {
+    /*background-color: red;*/
+    margin: 0px;
+}
+
+.container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.dflex {
+    display: flex;
+    flex-flow: row wrap; 
+}
+
+.dflexcol {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.h-100vh {
+    height: 100vh;
+}
+
+.h-100p {
+    height: 100%;
+}
+
+.w-100vh {
+    width: 100vh;
+}
+
+.w-100p {
+   width: 100%;
+}
+
+.p-2 {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.left-panel {
+    flex: 20%;
+    height: 100%;
+    background-color: yellow;
+    overflow: auto;
+}
+
+.right-panel {
+    flex: 80%;
+    height: 100%;
+    background-color: orange;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.card-header {
+    width: 100%;
+    padding: 0px;
+    flex-wrap: nowrap;
+}
+
+.card-body {
+    width: 100%;
+    padding: 2px;
+    flex-wrap: nowrap;
+}
+
+.fake-img {
+    background-color: dimgrey;
+    flex: 12%;
+    height: 64px;
+    align-self: center;
+    border-radius: 50%;
+}
+
+.card-details {
+    padding: 5px;
+    flex: 60%;
+}
+
+.custom-margin-block {
+    margin-block-start: 4px;
+    margin-block-end: 4px;
+}
+
+.custom-inputtextbox {
+    border-radius: 11px;
+    box-shadow: 2px 2px 2px #8c8383, -2px -2px 2px #8c8383, -2px 2px 2px #8c8383, 2px -2px 2px #8c8383;
+    border: 0px;
+    flex: 85%;
+}
+
+.custom-button {
+    flex: 2%;
+    height: 100%;
+    margin-left: 20px;
+    border-radius: 10px;
+    border: 0px;
+    box-shadow: 2px 2px 2px #8c8383, -2px -2px 2px #8c8383, -2px 2px 2px #8c8383, 2px -2px 2px #8c8383;
+}
+
+    .custom-button:focus, .custom-button:active:focus, .custom-button:focus-visible {
+        border-radius: 10px;
+        border: 1px solid black;
+        outline: 0px;
+    }
+
+input:focus-visible {
+    border-radius: 10px;
+    border: 1px solid black;
+    outline: 0px;
+}
+
+#custom-table-body2 tr td {
+    /* padding: 10px;*/
+    padding: 5px;
+}
+
+.custom-card-body {
+    /*    width: 100%;*/
+    display: flex;
+    flex-flow: row wrap;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 20px;
+}
