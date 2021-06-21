@@ -87,6 +87,10 @@ function showModal() {
 }
 
 function establishConnection() {
+    getToken();
+}
+
+function registerUser() {
     $.ajax({
         url: window.location.origin + '/api/account/register',
         headers: {
@@ -99,12 +103,32 @@ function establishConnection() {
             'Password': $('#password').val()
         }),
         success: function () {
-            // do nothing at the moment.
+            getToken();
+            //$("#registerModal").modal('hide');
         },
         error: function (jqXHR) {
-            $("#divError").text(jqXHR.responseText);
+            //$("#divError").text(jqXHR.responseText);
+            alert(JSON.parse(jqXHR.responseText).error_description);
         }
     });
+}
+
+function getToken() {
+    let _data = 'username=' + $('#userName').val() + '&password=' + $('#password').val() + '&grant_type=password';
+    $.ajax({
+        url: window.location.origin + '/token',
+        method: 'POST',
+        data: _data,
+        success: function (jqXHR) {
+            localStorage.setItem('access_token', jqXHR['access_token']);
+            localStorage.setItem('expires', jqXHR['.expires']);
+            localStorage.setItem('issued', jqXHR['.issued']);
+            $("#registerModal").modal('hide');
+        },
+        error: function (jqXHR) {
+            alert(JSON.parse(jqXHR.responseText).error_description);
+        }
+    })
 }
 
 $(document).ready(() => {
