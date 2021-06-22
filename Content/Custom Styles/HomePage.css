@@ -131,3 +131,7 @@ input:focus-visible {
     display: flex;
     align-items: center;
 }
+
+#registerModal {
+    background-color: white;
+}

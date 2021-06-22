@@ -83,14 +83,42 @@ function openModal() {
 }
 
 function showModal() {
-    $("#registerModal").modal('show');
+    if (localStorage.getItem('access_token')) {
+        let expiryDate = new Date(localStorage.getItem('expires'));
+        let currentDate = new Date();
+        if (expiryDate.getTime() > currentDate.getTime()) {
+            $("#registerModal").modal('show');
+        }
+    }
+    else {
+        $("#registerModal").modal('show');
+    }
 }
 
 function establishConnection() {
+    if (!validator()) {
+        alert("Please fill all the required fields");
+        return;
+    }
     getToken();
 }
 
+function validator() {
+    let userName = $('#userName').val();
+    let password = $('#password').val();
+    if ((userName && userName.trim.length > 0) && (password && password.trim.length > 0)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 function registerUser() {
+    if (!validator()) {
+        alert("Please fill all the required fields");
+        return;
+    }
     $.ajax({
         url: window.location.origin + '/api/account/register',
         headers: {
