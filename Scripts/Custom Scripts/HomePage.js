@@ -86,7 +86,7 @@ function showModal() {
     if (localStorage.getItem('access_token')) {
         let expiryDate = new Date(localStorage.getItem('expires'));
         let currentDate = new Date();
-        if (expiryDate.getTime() > currentDate.getTime()) {
+        if (expiryDate.getTime() < currentDate.getTime()) {
             $("#registerModal").modal('show');
         }
     }
@@ -106,7 +106,7 @@ function establishConnection() {
 function validator() {
     let userName = $('#userName').val();
     let password = $('#password').val();
-    if ((userName && userName.trim.length > 0) && (password && password.trim.length > 0)) {
+    if ((userName && userName.trim().length > 0) && (password && password.trim().length > 0)) {
         return true;
     }
     else {
@@ -119,6 +119,7 @@ function registerUser() {
         alert("Please fill all the required fields");
         return;
     }
+    $("#loaderClass").removeClass('hide');
     $.ajax({
         url: window.location.origin + '/api/account/register',
         headers: {
@@ -132,16 +133,19 @@ function registerUser() {
         }),
         success: function () {
             getToken();
+            $("#loaderClass").addClass('hide');
             //$("#registerModal").modal('hide');
         },
         error: function (jqXHR) {
             //$("#divError").text(jqXHR.responseText);
             alert(JSON.parse(jqXHR.responseText).error_description);
+            $("#loaderClass").addClass('hide');
         }
     });
 }
 
 function getToken() {
+    $("#loaderClass").removeClass('hide');
     let _data = 'username=' + $('#userName').val() + '&password=' + $('#password').val() + '&grant_type=password';
     $.ajax({
         url: window.location.origin + '/token',
@@ -152,10 +156,12 @@ function getToken() {
             localStorage.setItem('expires', jqXHR['.expires']);
             localStorage.setItem('issued', jqXHR['.issued']);
             $("#registerModal").modal('hide');
+            $("#loaderClass").addClass('hide');
         },
         error: function (jqXHR) {
             alert(JSON.parse(jqXHR.responseText).error_description);
-        }
+            $("#loaderClass").addClass('hide');
+        },
     })
 }
 

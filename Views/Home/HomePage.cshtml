@@ -17,6 +17,10 @@
 </head>
 <body onload="showModal()">
     <div class="container-fluid">
+        <div id="loaderClass" class="loader-class hide">
+            <img class="loader" src="~/Content/Images/Fidget-spinner.gif" />
+            <label class="loader-label">Loading...</label>
+        </div>
         <div class="dflex h-100vh">
             <div class="left-panel">
                 <table class="w-100p" id="custom-table">
@@ -61,7 +65,7 @@
                                         Hey there! Nothing much
                                     </div>
                                 </td>
-                            </tr>                            
+                            </tr>
                             <tr>
                                 <td colspan="2" style="display: flex; justify-content: flex-start;">
                                     <div class="custom-card-body">

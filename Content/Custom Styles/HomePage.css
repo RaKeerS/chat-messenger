@@ -130,8 +130,36 @@ input:focus-visible {
     height: 90%;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 #registerModal {
     background-color: white;
+}
+
+.loader-class {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column nowrap;
+    background-color: white;
+    z-index: 1070;
+    position: absolute;
+    opacity: 0.8;
+}
+
+.loader {
+    align-items: center;
+    width: 10%;
+    height: 20%;
+    z-index: inherit;
+    position: absolute;
+}
+
+.loader-label {
+    align-self: inherit;
+    z-index: inherit;
+    margin-top: 12%;
 }
