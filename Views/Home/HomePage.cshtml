@@ -90,8 +90,11 @@
                 <div class="card-footer" style="height: 78px;">
                     <div class="container-fluid p-2" style="height: 100%;">
                         <div class="dflex custom-inputdiv" style="height: 100%; padding: 6px;">
-                            <input type="text" class="custom-inputtextbox" />
-                            <button type="button" class="btn-default btn custom-button">Submit</button>
+                            <input id="messageBox" type="text" class="custom-inputtextbox" />
+                            <button type="button" class="btn-default btn custom-button"
+                                    onclick="sendMessage()">
+                                Submit
+                            </button>
                         </div>
                     </div>
                 </div>

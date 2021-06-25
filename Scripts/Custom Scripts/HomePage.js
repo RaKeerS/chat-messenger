@@ -165,6 +165,24 @@ function getToken() {
     })
 }
 
+function sendMessage() {
+    let message = $('#messageBox').val();
+    let messageBox = { accessToken: localStorage.getItem('access_token'), messageString: message };
+
+    $.ajax({
+        url: window.location.origin + '/home/sendMessage',
+        method: 'POST',
+        data: messageBox,
+        success: function (jqXHR) {
+            let response = jqXHR[0].Value;
+        },
+        error: function (jqXHR) {
+            let error = jqXHR;
+            alert(JSON.parse(jqXHR));
+        }
+    })
+}
+
 $(document).ready(() => {
     getAllUserChats();
     getUserChat();

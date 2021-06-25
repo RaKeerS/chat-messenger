@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -34,10 +35,12 @@ namespace Chat_Messenger.Controllers
         }
 
         [System.Web.Http.HttpPost]
-        public object sendMessage(messageBody message)
+        public JsonResult sendMessage(messageBody message)
         {
+            dynamic response = new ExpandoObject();
             messageBox.Add(message);
-            return messageBox;
+            response.messageBox = messageBox;
+            return Json(response);
         }
     }
 
