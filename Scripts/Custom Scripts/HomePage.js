@@ -1,19 +1,54 @@
-﻿function getAllUserChats() {
-    for (i = 0; i < 11; i++) {
-        $("#custom-table-body1").append(`
-        <tr>
+﻿var userChatAccountsList = [];
+var messageList = [];
+
+let currentChatUserName = '';
+
+//function getAllUserChatAccounts() {
+//    for (i = 0; i < 11; i++) {
+//        $("#custom-table-body1").append(`
+//        <tr>
+//            <td style="padding: 3px; border-bottom: 1px solid grey">
+//                <div class="card-body dflex">
+//                    <div class="img-circle fake-img"></div>
+//                    <div class="dflexcol card-details">
+//                        <h3 class="custom-margin-block">Test Name</h3>
+//                        <label>Some random text message!</label>
+//                    </div>
+//                </div>
+//            </td>
+//        </tr>`);
+//    }
+//}
+
+function getAllUserChatAccounts() {
+    for (i = 0; i < userChatAccountsList.length; i++) {
+        $("#custom-table-body1").empty().append(`
+        <tr class="clickable" onclick="openCoversation(this)">
             <td style="padding: 3px; border-bottom: 1px solid grey">
                 <div class="card-body dflex">
                     <div class="img-circle fake-img"></div>
                     <div class="dflexcol card-details">
-                        <h3 class="custom-margin-block">Test Name</h3>
-                        <label>Some random text message!</label>
+                        <h3 id="${'user'+i}" class="custom-margin-block">${userChatAccountsList[i].userName}</h3>
+                        <label id="${'label'+i}">${userChatAccountsList[i].message[0] ? userChatAccountsList[i].message[0] : '' }</label>
                     </div>
                 </div>
             </td>
         </tr>`);
     }
 }
+
+function getUserConversationWindow() {
+    $('#custom-card-header').empty().append(`
+        <div class="card-content dflex" style="padding: 5px 7px; border-bottom: 1px solid grey">
+            <div class="img-circle fake-img" style="flex: 3%;"></div>
+            <div class="dflexcol card-details" style="flex: 90%;">
+                <h3 id="currentConvoUserName" class="custom-margin-block"></h3>
+                <label id="currentConvoLabel"></label>
+            </div>
+        </div>
+    `);
+}
+
 
 const chats = [
     { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Hello! Whatsup!?!' },
@@ -42,39 +77,42 @@ const chats = [
     { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Oh, very well then!' }
 ]
 
-function getUserChat(userID) {
-    for (i = 0; i < chats.length; i++) {
-
-        if (chats[i].userID == 001) {
-            $("#custom-table-body2").append(
-            `
-                <tr>
-                    <td colspan="2" style="display: flex; justify-content: flex-end;">
-                        <div class="custom-card-body">
-                            <span>
-                                ${chats[i].message}
-                            </span>
-                        </div>
-                    </td>
-                </tr>
-            `
-            );
+function getUserChat() {
+    let userChat = userChatAccountsList.filter((item, index) => item.userName == currentChatUserName);
+    if (userChat && userChat.length > 0) {
+        let chats = userChat[0].message;
+        for (i = 0; i < chats.length; i++) {
+            if (chats[i].senderUserName == localStorage.getItem('userName')) {
+                $("#custom-table-body2").empty().append(
+                    `
+                    <tr>
+                        <td colspan="2" style="display: flex; justify-content: flex-end;">
+                            <div class="custom-card-body">
+                                <span>
+                                    ${chats[i].message}
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                `
+                );
+            }
+            else {
+                $("#custom-table-body2").empty().append(
+                    `
+                    <tr>
+                        <td colspan="2" style="display: flex; justify-content: flex-start;">
+                            <div class="custom-card-body">
+                                <span>
+                                    ${chats[i].message}
+                                </span>       
+                            </div>
+                        </td>
+                    </tr>
+                `
+                );
+            }
         }
-        else {
-            $("#custom-table-body2").append(
-            `
-                <tr>
-                    <td colspan="2" style="display: flex; justify-content: flex-start;">
-                        <div class="custom-card-body">
-                            <span>
-                                ${chats[i].message}
-                            </span>       
-                        </div>
-                    </td>
-                </tr>
-            `
-            );
-        }       
     }
 }
 
@@ -167,7 +205,10 @@ function getToken() {
 
 function sendMessage() {
     let message = $('#messageBox').val();
-    let messageBox = { accessToken: localStorage.getItem('access_token'), messageString: message };
+    let messageBox = { accessToken: localStorage.getItem('access_token'), messageString: message, userName: currentChatUserName };
+
+    let currentUserChat = userChatAccountsList.find((item, index) => item.userName == currentChatUserName);
+    currentUserChat.message.push({ receiverUserName: currentChatUserName, senderUserName: localStorage.getItem('userName'), message: message });
 
     $.ajax({
         url: window.location.origin + '/home/sendMessage',
@@ -175,6 +216,8 @@ function sendMessage() {
         data: messageBox,
         success: function (jqXHR) {
             let response = jqXHR[0].Value;
+            $('#messageBox').val('');
+            getUserChat();
         },
         error: function (jqXHR) {
             let error = jqXHR;
@@ -183,8 +226,54 @@ function sendMessage() {
     })
 }
 
+function connectUser() {
+    if (!($('#connectToUserName').val() && $('#connectToUserName').val().trim().length > 0)) {
+        alert("Please fill all the required fields");
+        return;
+    }
+    $.ajax({
+        url: window.location.origin + '/home/startNewChat',
+        method: 'POST',
+        data: {
+            userName: $('#connectToUserName').val()
+        },
+        success: function (jqXHR) {
+            let response = jqXHR;
+            userChatAccountsList.push({ userId: jqXHR[0].Value, userName: jqXHR[1].Value, message: _.cloneDeep(messageList) });
+            getAllUserChatAccounts();
+            closeModal('chatConnectionModal');
+        },
+        error: function (jqXHR) {
+            alert(JSON.parse(jqXHR));
+            //$("#chatConnectionModal").modal('hide');
+        }
+    })
+}
+
+function startNewChat() {
+    $("#chatConnectionModal").modal('show');
+}
+
+function openCoversation(elem) {
+    $('#currentConvoUserName')[0].innerText = elem.children[0].children[0].children[1].children[0].innerText;
+    $('#currentConvoLabel')[0].innerText = elem.children[0].children[0].children[1].children[1].innerText;
+
+    currentChatUserName = elem.children[0].children[0].children[1].children[0].innerText;
+
+    $('#cardFooter').removeClass('hidden');
+    $('#img-div').removeClass('hidden');
+
+    // Load all chat messages - call function for it!
+    getUserChat();
+
+}
+
+function closeModal(modalId) {
+    $('#' + modalId).modal('hide');
+}
+
 $(document).ready(() => {
-    getAllUserChats();
+    getAllUserChatAccounts();
     getUserChat();
     //openModal();
     showModal();

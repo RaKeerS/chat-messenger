@@ -10,9 +10,11 @@
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="~/Content/bootstrap.css" />
     <link rel="stylesheet" href="~/Content/Custom Styles/HomePage.css" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" /> <!--load all styles -->
     <script type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <script type="text/javascript" src="~/Scripts/Custom Scripts/HomePage.js"></script>
+    <script type="text/javascript" src="~/Scripts/Custom Scripts/loadash.js"></script>
     <title>HomePage</title>
 </head>
 <body onload="showModal()">
@@ -25,7 +27,7 @@
             <div class="left-panel">
                 <table class="w-100p" id="custom-table">
                     <tbody id="custom-table-body1">
-                        <tr>
+                        @*<tr>
                             <td style="padding: 3px; border-bottom: 1px solid grey">
                                 <div class="card-body dflex">
                                     <div class="img-circle fake-img"></div>
@@ -35,24 +37,29 @@
                                     </div>
                                 </div>
                             </td>
-                        </tr>
+                        </tr>*@
                     </tbody>
                 </table>
+                <div class="floating-div">
+                    <button type="button" class="btn btn-success floating-button" onclick="startNewChat()">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </div>
             </div>
             <div class="right-panel">
-                <div class="card-header" style="background-color: green;">
-                    <div class="card-content dflex" style="padding: 5px 7px; border-bottom: 1px solid grey">
-                        <div class="img-circle fake-img" style="flex: 3%;"></div>
+                <div id="custom-card-header" class="card-header" style="background-color: green; height: 75px;">
+                    <div class="card-content dflex" style="padding: 5px 7px; border-bottom: 1px solid grey; height: 75px;">
+                        <div id="img-div" class="img-circle fake-img hidden" style="flex: 3%;"></div>
                         <div class="dflexcol card-details" style="flex: 90%;">
-                            <h3 class="custom-margin-block">Test Name</h3>
-                            <label>Some random text message!</label>
+                            <h3 id="currentConvoUserName" class="custom-margin-block"></h3>
+                            <label id="currentConvoLabel"></label>
                         </div>
                     </div>
                 </div>
                 <div class="card-body" style="background-color: white; height: 100%; overflow: auto;">
                     <table class="w-100p">
                         <tbody id="custom-table-body2">
-                            <tr>
+                            @*<tr>
                                 <td colspan="2" style="display: flex; justify-content: flex-end;">
                                     <div class="custom-card-body">
                                         <span>Hello! Whatsup!?</span>
@@ -72,7 +79,7 @@
                                         How about you!?
                                     </div>
                                 </td>
-                            </tr>
+                            </tr>*@
                         </tbody>
                     </table>
                     @*<ul>
@@ -87,7 +94,7 @@
                         </li>
                     </ul>*@
                 </div>
-                <div class="card-footer" style="height: 78px;">
+                <div id="cardFooter" class="card-footer hidden" style="height: 78px;">
                     <div class="container-fluid p-2" style="height: 100%;">
                         <div class="dflex custom-inputdiv" style="height: 100%; padding: 6px;">
                             <input id="messageBox" type="text" class="custom-inputtextbox" />
@@ -107,8 +114,8 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             @*<button type="button" class="close" data-dismiss="modal">
-                                &times;
-                            </button>*@
+                            &times;
+                        </button>*@
                             <h4 class="modal-title">Enter Credentials</h4>
                         </div>
                         <div class="modal-body">
@@ -137,7 +144,35 @@
                 <a id="linkClose" href="#" class="close">&times;</a>
                 <div id="divErrorText"></div>
             </div>
-
+            <div class="modal fade" tabindex="-1" id="chatConnectionModal"
+                 data-keyboard="false" data-backdrop="static">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            &times;
+                        </button>
+                            <h4 class="modal-title">Enter User Name to Chat with</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <label>User Name <label style="color: red;">*</label></label>
+                                <input id="connectToUserName" type="text" class="form-control" required />
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary pull-left"
+                                    onclick="closeModal('chatConnectionModal')">
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn btn-success"
+                                    onclick="connectUser()">
+                                Connect
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

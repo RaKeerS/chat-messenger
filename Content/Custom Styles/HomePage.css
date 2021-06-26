@@ -161,5 +161,23 @@ input:focus-visible {
 .loader-label {
     align-self: inherit;
     z-index: inherit;
-    margin-top: 12%;
+
+}
+
+.floating-div {
+    top: 92%;
+    left: 14%;
+    position: absolute;
+}
+
+.floating-button {
+    height: 50px;
+    width: 50px;
+    border-radius: 15px;
+    font-size: 1.5em;
+    padding: 8px 13px;
+}
+
+.clickable {
+    cursor: pointer;
 }
