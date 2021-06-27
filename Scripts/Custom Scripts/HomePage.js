@@ -193,6 +193,7 @@ function getToken() {
             localStorage.setItem('access_token', jqXHR['access_token']);
             localStorage.setItem('expires', jqXHR['.expires']);
             localStorage.setItem('issued', jqXHR['.issued']);
+            localStorage.setItem('userName', jqXHR['userName']);
             $("#registerModal").modal('hide');
             $("#loaderClass").addClass('hide');
         },
@@ -200,7 +201,7 @@ function getToken() {
             alert(JSON.parse(jqXHR.responseText).error_description);
             $("#loaderClass").addClass('hide');
         },
-    })
+    });
 }
 
 function sendMessage() {
