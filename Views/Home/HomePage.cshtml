@@ -3,6 +3,10 @@
     Layout = null;
 }
 
+@*@section Scripts {
+        @Scripts.Render("~/Scripts/jquery.signalR-2.4.2.js");
+    }*@
+
 <!DOCTYPE html>
 
 <html>
@@ -15,6 +19,7 @@
     <script src="~/Scripts/bootstrap.js"></script>
     <script type="text/javascript" src="~/Scripts/Custom Scripts/HomePage.js"></script>
     <script type="text/javascript" src="~/Scripts/Custom Scripts/loadash.js"></script>
+    @*<script src="~/Scripts/jquery.signalR-2.4.2.js"></script>*@
     <title>HomePage</title>
 </head>
 <body onload="showModal()">
@@ -28,16 +33,16 @@
                 <table class="w-100p" id="custom-table">
                     <tbody id="custom-table-body1">
                         @*<tr>
-                            <td style="padding: 3px; border-bottom: 1px solid grey">
-                                <div class="card-body dflex">
-                                    <div class="img-circle fake-img"></div>
-                                    <div class="dflexcol card-details">
-                                        <h3 class="custom-margin-block">Test Name</h3>
-                                        <label>Some random text message!</label>
+                                <td style="padding: 3px; border-bottom: 1px solid grey">
+                                    <div class="card-body dflex">
+                                        <div class="img-circle fake-img"></div>
+                                        <div class="dflexcol card-details">
+                                            <h3 class="custom-margin-block">Test Name</h3>
+                                            <label>Some random text message!</label>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>*@
+                                </td>
+                            </tr>*@
                     </tbody>
                 </table>
                 <div class="floating-div">
@@ -60,39 +65,39 @@
                     <table class="w-100p">
                         <tbody id="custom-table-body2">
                             @*<tr>
-                                <td colspan="2" style="display: flex; justify-content: flex-end;">
-                                    <div class="custom-card-body">
-                                        <span>Hello! Whatsup!?</span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="display: flex; justify-content: flex-start;">
-                                    <div class="custom-card-body">
-                                        Hey there! Nothing much
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="display: flex; justify-content: flex-start;">
-                                    <div class="custom-card-body">
-                                        How about you!?
-                                    </div>
-                                </td>
-                            </tr>*@
+                                    <td colspan="2" style="display: flex; justify-content: flex-end;">
+                                        <div class="custom-card-body">
+                                            <span>Hello! Whatsup!?</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="display: flex; justify-content: flex-start;">
+                                        <div class="custom-card-body">
+                                            Hey there! Nothing much
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="display: flex; justify-content: flex-start;">
+                                        <div class="custom-card-body">
+                                            How about you!?
+                                        </div>
+                                    </td>
+                                </tr>*@
                         </tbody>
                     </table>
                     @*<ul>
-                        <li>
-                            Hello! Whatsup!?
-                        </li>
-                        <li>
-                            Hey there! Nothing much
-                        </li>
-                        <li>
-                            How about you!?
-                        </li>
-                    </ul>*@
+                            <li>
+                                Hello! Whatsup!?
+                            </li>
+                            <li>
+                                Hey there! Nothing much
+                            </li>
+                            <li>
+                                How about you!?
+                            </li>
+                        </ul>*@
                 </div>
                 <div id="cardFooter" class="card-footer hidden" style="height: 78px;">
                     <div class="container-fluid p-2" style="height: 100%;">
@@ -114,8 +119,8 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             @*<button type="button" class="close" data-dismiss="modal">
-                            &times;
-                        </button>*@
+                                    &times;
+                                </button>*@
                             <h4 class="modal-title">Enter Credentials</h4>
                         </div>
                         <div class="modal-body">
@@ -149,9 +154,9 @@
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">
-                            &times;
-                        </button>
+                            <button type="button" class="close" data-dismiss="modal">
+                                &times;
+                            </button>
                             <h4 class="modal-title">Enter User Name to Chat with</h4>
                         </div>
                         <div class="modal-body">
@@ -176,4 +181,9 @@
         </div>
     </div>
 </body>
+
 </html>
+
+<script src="~/Scripts/jquery.signalR-2.4.2.js"></script>
+<script src="~/Scripts/jquery.signalR-2.4.2.min.js"></script>
+<script src="~/signalr/hubs"></script>

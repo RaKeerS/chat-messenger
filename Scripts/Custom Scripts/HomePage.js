@@ -1,6 +1,8 @@
 ﻿var userChatAccountsList = [];
 var messageList = [];
 
+let commonBridge;
+
 let currentChatUserName = '';
 
 //function getAllUserChatAccounts() {
@@ -29,7 +31,7 @@ function getAllUserChatAccounts() {
                     <div class="img-circle fake-img"></div>
                     <div class="dflexcol card-details">
                         <h3 id="${'user'+i}" class="custom-margin-block">${userChatAccountsList[i].userName}</h3>
-                        <label id="${'label'+i}">${userChatAccountsList[i].message[0] ? userChatAccountsList[i].message[0] : '' }</label>
+                        <label id="${'label'+i}">${userChatAccountsList[i].message[0] ? userChatAccountsList[i].message[0].message : '' }</label>
                     </div>
                 </div>
             </td>
@@ -211,20 +213,26 @@ function sendMessage() {
     let currentUserChat = userChatAccountsList.find((item, index) => item.userName == currentChatUserName);
     currentUserChat.message.push({ receiverUserName: currentChatUserName, senderUserName: localStorage.getItem('userName'), message: message });
 
-    $.ajax({
-        url: window.location.origin + '/home/sendMessage',
-        method: 'POST',
-        data: messageBox,
-        success: function (jqXHR) {
-            let response = jqXHR[0].Value;
-            $('#messageBox').val('');
-            getUserChat();
-        },
-        error: function (jqXHR) {
-            let error = jqXHR;
-            alert(JSON.parse(jqXHR));
-        }
-    })
+    commonBridge.invoke('sendMessageTo', localStorage.getItem('userName'), currentChatUserName, message).then(() => {
+        console.log('Invoked sendMessageTo successfully!');
+        $('#messageBox').val('');
+        getUserChat();
+    }).catch( (err) => console.log(err));
+
+    //$.ajax({
+    //    url: window.location.origin + '/home/sendMessage',
+    //    method: 'POST',
+    //    data: messageBox,
+    //    success: function (jqXHR) {
+    //        let response = jqXHR[0].Value;
+    //        $('#messageBox').val('');
+    //        getUserChat();
+    //    },
+    //    error: function (jqXHR) {
+    //        let error = jqXHR;
+    //        alert(JSON.parse(jqXHR));
+    //    }
+    //});
 }
 
 function connectUser() {
@@ -278,4 +286,41 @@ $(document).ready(() => {
     getUserChat();
     //openModal();
     showModal();
-});
+    initiateSignalR();
+}); 
+
+
+function initiateSignalR() {
+    var connection = $.hubConnection();
+    commonBridge = connection.createHubProxy('commonBridge');
+    commonBridge.on('hello', () => {
+        console.log('Hello!!');
+        alert('Hello!');
+    });
+
+    commonBridge.on('messageReceived', (senderUserName, receiverUserName, message) => {
+        // We sent the message to server and received the response here.
+        console.log('messageReceived', senderUserName, receiverUserName, message);
+
+        if (localStorage.getItem('userName') == receiverUserName) {
+            // Create list of Users on left panel
+            userChatAccountsList.push({ userId: '', userName: senderUserName, message: _.cloneDeep(messageList) });
+
+            // Add the message broadcasted to thus newly added User's (in left panel) message list
+            let currentUserChat = userChatAccountsList.find((item, index) => item.userName == senderUserName);
+            currentUserChat.message.push({ receiverUserName: receiverUserName, senderUserName: senderUserName, message: message });
+
+            getAllUserChatAccounts();
+        }
+        //let currentUserChat = userChatAccountsList.find((item, index) => item.userName == currentChatUserName);
+        //currentUserChat.message.push({ receiverUserName: currentChatUserName, senderUserName: localStorage.getItem('userName'), message: message });
+    });
+
+    connection.start().catch(err => console.error(err.toString())).then(function () {
+        commonBridge.invoke('hello').then(function () {
+            console.log('Successful!!');
+            alert('Successful!!');
+        });
+    });
+}
+
