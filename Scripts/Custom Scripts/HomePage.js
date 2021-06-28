@@ -5,6 +5,8 @@ let commonBridge;
 
 let currentChatUserName = '';
 
+let isConversationWindowOpen = false;
+
 //function getAllUserChatAccounts() {
 //    for (i = 0; i < 11; i++) {
 //        $("#custom-table-body1").append(`
@@ -22,20 +24,27 @@ let currentChatUserName = '';
 //    }
 //}
 
-function getAllUserChatAccounts() {
-    for (i = 0; i < userChatAccountsList.length; i++) {
-        $("#custom-table-body1").empty().append(`
+function getAllUserChatAccounts() { // Gets all active Chats on the left hand side
+    $("#custom-table-body1").empty();
+    let chatAccounts = userChatAccountsList;
+    for (i = 0; i < chatAccounts.length; i++) {
+        $("#custom-table-body1").append(`
         <tr class="clickable" onclick="openCoversation(this)">
             <td style="padding: 3px; border-bottom: 1px solid grey">
                 <div class="card-body dflex">
                     <div class="img-circle fake-img"></div>
                     <div class="dflexcol card-details">
-                        <h3 id="${'user'+i}" class="custom-margin-block">${userChatAccountsList[i].userName}</h3>
-                        <label id="${'label'+i}">${userChatAccountsList[i].message[0] ? userChatAccountsList[i].message[0].message : '' }</label>
+                        <h3 id="${'user' + i}" class="custom-margin-block">${chatAccounts[i].userName}</h3>
+                        <label id="${'label' + i}">${chatAccounts[i].message[chatAccounts[i].message.length - 1] ? chatAccounts[i].message[chatAccounts[i].message.length - 1].message : '' }</label>
                     </div>
                 </div>
             </td>
         </tr>`);
+    }
+
+    if (isConversationWindowOpen) {
+        // Load all chat messages - call function for it!
+        getUserChat();
     }
 }
 
@@ -83,9 +92,10 @@ function getUserChat() {
     let userChat = userChatAccountsList.filter((item, index) => item.userName == currentChatUserName);
     if (userChat && userChat.length > 0) {
         let chats = userChat[0].message;
+        $("#custom-table-body2").empty();
         for (i = 0; i < chats.length; i++) {
             if (chats[i].senderUserName == localStorage.getItem('userName')) {
-                $("#custom-table-body2").empty().append(
+                $("#custom-table-body2").append(
                     `
                     <tr>
                         <td colspan="2" style="display: flex; justify-content: flex-end;">
@@ -100,7 +110,7 @@ function getUserChat() {
                 );
             }
             else {
-                $("#custom-table-body2").empty().append(
+                $("#custom-table-body2").append(
                     `
                     <tr>
                         <td colspan="2" style="display: flex; justify-content: flex-start;">
@@ -272,6 +282,8 @@ function openCoversation(elem) {
     $('#cardFooter').removeClass('hidden');
     $('#img-div').removeClass('hidden');
 
+    isConversationWindowOpen = true;
+
     // Load all chat messages - call function for it!
     getUserChat();
 
@@ -304,7 +316,13 @@ function initiateSignalR() {
 
         if (localStorage.getItem('userName') == receiverUserName) {
             // Create list of Users on left panel
-            userChatAccountsList.push({ userId: '', userName: senderUserName, message: _.cloneDeep(messageList) });
+
+            if (userChatAccountsList.length == 0) {
+                userChatAccountsList.push({ userId: '', userName: senderUserName, message: _.cloneDeep(messageList) });
+            }
+            else if (userChatAccountsList.length > 0 && userChatAccountsList.find(x => x.userName == senderUserName).length == 0) {
+                userChatAccountsList.push({ userId: '', userName: senderUserName, message: _.cloneDeep(messageList) });
+            }
 
             // Add the message broadcasted to thus newly added User's (in left panel) message list
             let currentUserChat = userChatAccountsList.find((item, index) => item.userName == senderUserName);
