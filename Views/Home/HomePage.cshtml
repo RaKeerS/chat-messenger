@@ -46,14 +46,14 @@
                     </tbody>
                 </table>
                 <div class="floating-div">
-                    <button type="button" class="btn btn-success floating-button" onclick="startNewChat()">
+                    <button type="button" title="New Chat" class="btn btn-success floating-button" onclick="startNewChat()">
                         <i class="fas fa-edit"></i>
                     </button>
                 </div>
             </div>
             <div class="right-panel">
-                <div id="custom-card-header" class="card-header" style="background-color: green; height: 75px;">
-                    <div class="card-content dflex" style="padding: 5px 7px; border-bottom: 1px solid grey; height: 75px;">
+                <div id="custom-card-header" class="card-header hidden" style="background-color: green; height: auto;">
+                    <div class="card-content dflex" style="padding: 5px 7px; border-bottom: 1px solid grey; height: auto;">
                         <div id="img-div" class="img-circle fake-img hidden" style="flex: 3%;"></div>
                         <div class="dflexcol card-details" style="flex: 90%;">
                             <h3 id="currentConvoUserName" class="custom-margin-block"></h3>
@@ -99,13 +99,13 @@
                             </li>
                         </ul>*@
                 </div>
-                <div id="cardFooter" class="card-footer hidden" style="height: 78px;">
+                <div id="cardFooter" class="card-footer hidden" style="height: 16%;">
                     <div class="container-fluid p-2" style="height: 100%;">
-                        <div class="dflex custom-inputdiv" style="height: 100%; padding: 6px;">
-                            <input id="messageBox" type="text" class="custom-inputtextbox" />
-                            <button type="button" class="btn-default btn custom-button"
+                        <div class="dflex custom-inputdiv" style="height: 100%; padding: 6px; align-items: center;">
+                            <textarea rows="2" id="messageBox" title="Enter Message" placeholder="Type a message" type="text" class="custom-inputtextarea" style="height: 80%; resize: unset; overflow: hidden;"></textarea>
+                            <button type="button" title="Send Message" class="custom-button" style="height: 75%;"
                                     onclick="sendMessage()">
-                                Submit
+                                <i class="fas fa-paper-plane"></i> 
                             </button>
                         </div>
                     </div>
@@ -132,13 +132,13 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary pull-left"
+                            <button type="button" title="Register User" class="btn btn-primary pull-left"
                                     onclick="registerUser()">
                                 Register
                             </button>
-                            <button type="submit" class="btn btn-success"
+                            <button type="submit" title="Sign In" class="btn btn-success"
                                     onclick="establishConnection()">
-                                Submit
+                                Sign In
                             </button>
                         </div>
                     </div>
@@ -166,11 +166,11 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary pull-left"
+                            <button type="button" title="Close Connection" class="btn btn-primary pull-left"
                                     onclick="closeModal('chatConnectionModal')">
                                 Cancel
                             </button>
-                            <button type="submit" class="btn btn-success"
+                            <button type="submit" title="Connect" class="btn btn-success"
                                     onclick="connectUser()">
                                 Connect
                             </button>
