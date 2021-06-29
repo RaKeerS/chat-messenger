@@ -68,15 +68,16 @@
 
 .fake-img {
     background-color: dimgrey;
-    flex: 12%;
-    height: 64px;
+    flex: 12% 1;
+    height: 67px;
     align-self: center;
     border-radius: 50%;
 }
 
 .card-details {
-    padding: 5px;
+    padding: 7px;
     flex: 60%;
+    margin-left: 4px;
 }
 
 .custom-margin-block {
@@ -84,25 +85,35 @@
     margin-block-end: 4px;
 }
 
-.custom-inputtextbox {
+.custom-inputtextarea {
     border-radius: 11px;
-    box-shadow: 2px 2px 2px #8c8383, -2px -2px 2px #8c8383, -2px 2px 2px #8c8383, 2px -2px 2px #8c8383;
+    /*box-shadow: 2px 2px 2px #8c8383, -2px -2px 2px #8c8383, -2px 2px 2px #8c8383, 2px -2px 2px #8c8383;*/
     border: 0px;
-    flex: 85%;
+    flex: 90%;
+    padding: 14px;
+    border: 1px solid #292828
 }
+
+    .custom-inputtextarea:focus, .custom-inputtextarea:active:focus, .custom-inputtextarea:focus-visible {
+        border-radius: 10px;
+        /* border: 1px solid black;*/
+        outline: 0px;
+    }
 
 .custom-button {
     flex: 2%;
     height: 100%;
-    margin-left: 20px;
+    margin-left: 4px;
     border-radius: 10px;
     border: 0px;
-    box-shadow: 2px 2px 2px #8c8383, -2px -2px 2px #8c8383, -2px 2px 2px #8c8383, 2px -2px 2px #8c8383;
+    /*box-shadow: 2px 2px 2px #8c8383, -2px -2px 2px #8c8383, -2px 2px 2px #8c8383, 2px -2px 2px #8c8383;*/
+    font-size: 2em;
+    background: transparent;
 }
 
     .custom-button:focus, .custom-button:active:focus, .custom-button:focus-visible {
         border-radius: 10px;
-        border: 1px solid black;
+       /* border: 1px solid black;*/
         outline: 0px;
     }
 
@@ -161,11 +172,11 @@ input:focus-visible {
 .loader-label {
     align-self: inherit;
     z-index: inherit;
-
+    margin-top: 14%;
 }
 
 .floating-div {
-    top: 92%;
+    top: 90%;
     left: 14%;
     position: absolute;
 }

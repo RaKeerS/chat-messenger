@@ -216,6 +216,23 @@ function getToken() {
     });
 }
 
+function addEventListeners() {
+    document.getElementById('messageBox').addEventListener("keyup", function (event) {
+        // Number 13 is the "Enter" key on the keyboard
+        //if (event.keyCode == 13 && event.shiftKey) {
+        //    document.getElementById("d").innerHTML = "Triggered enter+shift";
+        //}
+        if (event.keyCode == 13 && !event.shiftKey) {
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            //document.getElementById("myBtn").click();
+
+            sendMessage();
+        }
+    }); 
+}
+
 function sendMessage() {
     let message = $('#messageBox').val();
     let messageBox = { accessToken: localStorage.getItem('access_token'), messageString: message, userName: currentChatUserName };
@@ -250,6 +267,22 @@ function connectUser() {
         alert("Please fill all the required fields");
         return;
     }
+    let enteredUserName = userChatAccountsList.find((item, index) => item.userName == $('#connectToUserName').val());
+    if (enteredUserName) {
+        currentChatUserName = $('#connectToUserName').val();
+        $('#currentConvoUserName')[0].innerText = currentChatUserName;
+        $('#currentConvoLabel')[0].innerText = 'online';
+
+        $('#connectToUserName').val('');
+        closeModal('chatConnectionModal');
+
+        // Load all chat messages - call function for it!
+        getUserChat();
+
+        return;
+    }
+
+    $("#loaderClass").removeClass('hide');
     $.ajax({
         url: window.location.origin + '/home/startNewChat',
         method: 'POST',
@@ -260,10 +293,13 @@ function connectUser() {
             let response = jqXHR;
             userChatAccountsList.push({ userId: jqXHR[0].Value, userName: jqXHR[1].Value, message: _.cloneDeep(messageList) });
             getAllUserChatAccounts();
+            $('#connectToUserName').val('')
             closeModal('chatConnectionModal');
+            $("#loaderClass").addClass('hide');
         },
         error: function (jqXHR) {
             alert(JSON.parse(jqXHR));
+            $('#connectToUserName').val('');
             //$("#chatConnectionModal").modal('hide');
         }
     })
@@ -275,10 +311,12 @@ function startNewChat() {
 
 function openCoversation(elem) {
     $('#currentConvoUserName')[0].innerText = elem.children[0].children[0].children[1].children[0].innerText;
-    $('#currentConvoLabel')[0].innerText = elem.children[0].children[0].children[1].children[1].innerText;
+    //$('#currentConvoLabel')[0].innerText = elem.children[0].children[0].children[1].children[1].innerText;
+    $('#currentConvoLabel')[0].innerText = 'online';
 
     currentChatUserName = elem.children[0].children[0].children[1].children[0].innerText;
 
+    $('#custom-card-header').removeClass('hidden');
     $('#cardFooter').removeClass('hidden');
     $('#img-div').removeClass('hidden');
 
@@ -299,6 +337,7 @@ $(document).ready(() => {
     //openModal();
     showModal();
     initiateSignalR();
+    addEventListeners();
 }); 
 
 
@@ -341,4 +380,3 @@ function initiateSignalR() {
         });
     });
 }
-
