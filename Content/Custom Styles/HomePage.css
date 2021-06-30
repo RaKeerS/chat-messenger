@@ -40,14 +40,16 @@
 }
 
 .left-panel {
-    flex: 20%;
+    /*flex: 20%;*/
+    flex: 5%;
     height: 100%;
     background-color: yellow;
     overflow: auto;
 }
 
 .right-panel {
-    flex: 80%;
+    /*flex: 80%;*/
+    flex: 55%;
     height: 100%;
     background-color: orange;
     display: flex;
@@ -68,15 +70,20 @@
 
 .fake-img {
     background-color: dimgrey;
-    flex: 12% 1;
+    /*flex: 12% 1;*/
+    flex: 3% 1;
     height: 67px;
     align-self: center;
     border-radius: 50%;
 }
 
+#cardDetails {
+    flex: 90%;
+}
+
 .card-details {
     padding: 7px;
-    flex: 60%;
+    flex: 60% ;
     margin-left: 4px;
 }
 
@@ -90,7 +97,7 @@
     /*box-shadow: 2px 2px 2px #8c8383, -2px -2px 2px #8c8383, -2px 2px 2px #8c8383, 2px -2px 2px #8c8383;*/
     border: 0px;
     flex: 90%;
-    padding: 14px;
+    padding: 14px 14px 10px 14px;
     border: 1px solid #292828
 }
 
@@ -177,7 +184,8 @@ input:focus-visible {
 
 .floating-div {
     top: 90%;
-    left: 14%;
+   /* left: 14%;*/
+    left: 20%;
     position: absolute;
 }
 
@@ -191,4 +199,280 @@ input:focus-visible {
 
 .clickable {
     cursor: pointer;
+}
+
+@media only screen and (max-width: 1300px) {
+    .card-details {
+        flex: 59%;
+    }
+
+    #cardDetails {
+        flex: 89%;
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+    .card-details {
+        flex: 57%;
+    }
+
+    #cardDetails {
+        flex: 89%;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .card-details {
+        flex: 56%;
+    }
+
+    #cardDetails {
+        flex: 88%;
+    }
+}
+
+@media only screen and (max-width: 1150px) {
+    .card-details {
+        flex: 52%;
+    }
+
+    #cardDetails {
+        flex: 88%;
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+    .card-details {
+        flex: 57%;
+    }
+
+    #cardDetails {
+        flex: 89%;
+    }
+}
+
+@media only screen and (max-width: 1150px) {
+    .card-details {
+        flex: 56%;
+    }
+
+    #cardDetails {
+        flex: 88%;
+    }
+
+    .right-panel {
+        flex: 54%;
+    }
+
+    .floating-div {
+        left: 20%;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    .card-details {
+        flex: 53%;
+    }
+
+    #cardDetails {
+        flex: 87%;
+    }
+}
+
+@media only screen and (max-width: 1050px) {
+    .card-details {
+        flex: 51%;
+    }
+
+    #cardDetails {
+        flex: 86%;
+    }
+}
+
+
+@media only screen and (max-width: 1020px) {
+    .card-details {
+        flex: 48%;
+    }
+
+    #cardDetails {
+        flex: 85%;
+    }
+
+    .right-panel {
+        flex: 53%;
+    }
+}
+
+@media only screen and (max-width: 980px) {
+    .right-panel {
+        flex: 52%;
+    }
+}
+
+@media only screen and (max-width: 950px) {
+    .card-details {
+        flex: 45%;
+    }
+
+    #cardDetails {
+        flex: 83%;
+    }
+
+    .floating-div {
+        left: 20%;
+    }
+
+    .right-panel {
+        flex: 51.5%;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .card-details {
+        flex: 43%;
+    }
+
+    #cardDetails {
+        flex: 83%;
+    }
+}
+
+@media only screen and (max-width: 870px) {
+    .card-details {
+        flex: 42%;
+    }
+
+    #cardDetails {
+        flex: 82%;
+    }
+
+    .right-panel {
+        flex: 50.5%;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .card-details {
+        flex: 41%;
+    }
+
+    #cardDetails {
+        flex: 81%;
+    }
+
+    .right-panel {
+        flex: 50%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .card-details {
+        flex: 40%;
+    }
+
+    #cardDetails {
+        flex: 80%;
+    }
+
+    .right-panel {
+        flex: 49.5%;
+    }
+}
+
+@media only screen and (max-width: 770px) {
+    .card-details {
+        flex: 36%;
+    }
+
+    #cardDetails {
+        flex: 78%;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+/*    .card-details {
+        flex: 36%;
+    }
+
+    #cardDetails {
+        flex: 78%;
+    }
+*/
+    .right-panel {
+        flex: 48.5%;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .card-details {
+        flex: 32%;
+    }
+
+    #cardDetails {
+        flex: 75.5%;
+    }
+
+    .right-panel {
+        flex: 47.5%;
+    }
+
+/*    .floating-div {
+        left: 20%;
+    }*/
+}
+
+@media only screen and (max-width: 670px) {
+    .card-details {
+        flex: 26%;
+    }
+
+    #cardDetails {
+        flex: 74%;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .card-details {
+        flex: 30%;
+    }
+
+    #cardDetails {
+        flex: 70%;
+    }
+}
+
+
+@media only screen and (max-width: 600px) {
+    .card-details {
+        flex: 24%;
+    }
+
+    #cardDetails {
+        flex: 68%;
+    }
+}
+
+@media only screen and (max-width: 570px) {
+    .card-details {
+        flex: 20%;
+    }
+
+    #cardDetails {
+        flex: 66%;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .card-details {
+        flex: 16%;
+    }
+
+    #cardDetails {
+        flex: 64%;
+    }
+
+    .right-panel {
+        flex: 42%;
+    }
 }
