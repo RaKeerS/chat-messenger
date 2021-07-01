@@ -12,18 +12,22 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+
     <link rel="stylesheet" href="~/Content/bootstrap.css" />
     <link rel="stylesheet" href="~/Content/Custom Styles/HomePage.css" />
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" /> <!--load all styles -->
-    <script type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script type="text/javascript" src="~/Scripts/Custom Scripts/HomePage.js"></script>
-    <script type="text/javascript" src="~/Scripts/Custom Scripts/loadash.js"></script>
-    @*<script src="~/Scripts/jquery.signalR-2.4.2.js"></script>*@
-    <title>HomePage</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>Chat Messenger</title>
 </head>
 <body onload="showModal()">
-    <div class="container-fluid">
+    <div class="container-fluid main">
         <div id="loaderClass" class="loader-class hide">
             <img class="loader" src="~/Content/Images/Fidget-spinner.gif" />
             <label class="loader-label">Loading...</label>
@@ -52,16 +56,16 @@
                 </div>
             </div>
             <div class="right-panel">
-                <div id="custom-card-header" class="card-header hidden" style="background-color: green; height: auto;">
+                <div id="custom-card-header" class="card-header hidden" style="height: auto;">
                     <div class="card-content dflex" style="padding: 5px 7px; border-bottom: 1px solid grey; height: auto;">
                         <div id="img-div" class="img-circle fake-img hidden" style="flex: 4%;"></div>
                         <div id="cardDetails" class="dflexcol card-details">
-                            <h3 id="currentConvoUserName" class="custom-margin-block"></h3>
-                            <label id="currentConvoLabel"></label>
+                            <h3 id="currentConvoUserName" class="custom-margin-block custom-header"></h3>
+                            <label id="currentConvoLabel" class="custom-label"></label>
                         </div>
                     </div>
                 </div>
-                <div class="card-body" style="background-color: white; height: 100%; overflow: auto;">
+                <div class="card-body" style="height: 100%; overflow: auto;">
                     <table class="w-100p">
                         <tbody id="custom-table-body2">
                             @*<tr>
@@ -102,10 +106,10 @@
                 <div id="cardFooter" class="card-footer hidden" style="height: 16%;">
                     <div class="container-fluid p-2" style="height: 100%;">
                         <div class="dflex custom-inputdiv" style="height: 100%; padding: 6px; align-items: center;">
-                            <textarea rows="2" id="messageBox" title="Enter Message" placeholder="Type a message" type="text" class="custom-inputtextarea" style="height: 80%; resize: unset; overflow: hidden;"></textarea>
+                            <textarea rows="2" id="messageBox" title="Enter Message" placeholder="Type a message" type="text" class="custom-inputtextarea"></textarea>
                             <button type="button" title="Send Message" class="custom-button" style="height: 75%;"
                                     onclick="sendMessage()">
-                                <i class="fas fa-paper-plane"></i> 
+                                <i class="fas fa-paper-plane"></i>
                             </button>
                         </div>
                     </div>
@@ -183,6 +187,12 @@
 </body>
 
 </html>
+
+<script type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script type="text/javascript" src="~/Scripts/Custom Scripts/HomePage.js"></script>
+<script type="text/javascript" src="~/Scripts/Custom Scripts/loadash.js"></script>
+@*<script src="~/Scripts/jquery.signalR-2.4.2.js"></script>*@
 
 <script src="~/Scripts/jquery.signalR-2.4.2.js"></script>
 <script src="~/Scripts/jquery.signalR-2.4.2.min.js"></script>
