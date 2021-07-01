@@ -34,8 +34,8 @@ function getAllUserChatAccounts() { // Gets all active Chats on the left hand si
                 <div class="card-body dflex">
                     <div class="img-circle fake-img"></div>
                     <div class="dflexcol card-details">
-                        <h3 id="${'user' + i}" class="custom-margin-block">${chatAccounts[i].userName}</h3>
-                        <label id="${'label' + i}">${chatAccounts[i].message[chatAccounts[i].message.length - 1] ? chatAccounts[i].message[chatAccounts[i].message.length - 1].message : '' }</label>
+                        <h3 id="${'user' + i}" class="custom-margin-block custom-header">${chatAccounts[i].userName}</h3>
+                        <label id="${'label' + i}" class="custom-label">${chatAccounts[i].message[chatAccounts[i].message.length - 1] ? chatAccounts[i].message[chatAccounts[i].message.length - 1].message : '' }</label>
                     </div>
                 </div>
             </td>
@@ -235,10 +235,12 @@ function addEventListeners() {
 
 function sendMessage() {
     let message = $('#messageBox').val();
-    let messageBox = { accessToken: localStorage.getItem('access_token'), messageString: message, userName: currentChatUserName };
+    //let messageBox = { accessToken: localStorage.getItem('access_token'), messageString: message, userName: currentChatUserName };
 
-    let currentUserChat = userChatAccountsList.find((item, index) => item.userName == currentChatUserName);
-    currentUserChat.message.push({ receiverUserName: currentChatUserName, senderUserName: localStorage.getItem('userName'), message: message });
+    if (!(localStorage.getItem('userName') == currentChatUserName)) {
+        let currentUserChat = userChatAccountsList.find((item, index) => item.userName == currentChatUserName);
+        currentUserChat.message.push({ receiverUserName: currentChatUserName, senderUserName: localStorage.getItem('userName'), message: message });
+    }
 
     commonBridge.invoke('sendMessageTo', localStorage.getItem('userName'), currentChatUserName, message).then(() => {
         console.log('Invoked sendMessageTo successfully!');
@@ -343,6 +345,10 @@ $(document).ready(() => {
 
 function initiateSignalR() {
     var connection = $.hubConnection();
+    connection.logging = true;
+    connection.connectionSlow(function () {
+        console.log('We are currently experiencing difficulties with the connection.')
+    });
     commonBridge = connection.createHubProxy('commonBridge');
     commonBridge.on('hello', () => {
         console.log('Hello!!');
@@ -373,7 +379,9 @@ function initiateSignalR() {
         //currentUserChat.message.push({ receiverUserName: currentChatUserName, senderUserName: localStorage.getItem('userName'), message: message });
     });
 
-    connection.start().catch(err => console.error(err.toString())).then(function () {
+    connection.start().done().fail(function (error) {
+        console.log('Invocation of start failed. Error:' + error)
+    }).catch(err => console.error(err.toString())).then(function () {
         commonBridge.invoke('hello').then(function () {
             console.log('Successful!!');
             alert('Successful!!');
