@@ -32,7 +32,9 @@ function getAllUserChatAccounts() { // Gets all active Chats on the left hand si
         <tr class="clickable" onclick="openCoversation(this)">
             <td style="padding: 3px; border-bottom: 1px solid grey">
                 <div class="card-body dflex">
-                    <div class="img-circle fake-img"></div>
+                    <div class="img-circle fake-img">
+                        <img src="/assets/chat-avatar.png" class="image" alt="chat-avatar" />
+                    </div>
                     <div class="dflexcol card-details">
                         <h3 id="${'user' + i}" class="custom-margin-block custom-header">${chatAccounts[i].userName}</h3>
                         <label id="${'label' + i}" class="custom-label">${chatAccounts[i].message[chatAccounts[i].message.length - 1] ? chatAccounts[i].message[chatAccounts[i].message.length - 1].message : '' }</label>
