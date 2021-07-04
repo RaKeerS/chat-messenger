@@ -5,7 +5,8 @@ let commonBridge;
 let currentChatUserName = '';
 let isConversationWindowOpen = false;
 
-function getAllUserChatAccounts() { // Gets all active Chats on the left hand side
+/*********** Fn: Gets all active Chats on the left hand side ***********/
+function getAllUserChatAccounts() { 
     $("#custom-table-body1").empty();
     let chatAccounts = userChatAccountsList;
     for (i = 0; i < chatAccounts.length; i++) {
@@ -31,6 +32,7 @@ function getAllUserChatAccounts() { // Gets all active Chats on the left hand si
     }
 }
 
+/*********** Fn: Gets the User Conversation Window's header ***********/
 function getUserConversationWindow() {
     $('#custom-card-header').empty().append(`
         <div class="card-content dflex" style="padding: 5px 7px; border-bottom: 1px solid grey">
@@ -100,6 +102,7 @@ function showModal() {
     }
 }
 
+/*********** Fn: Establish Connection on Login ***********/
 function establishConnection() {
     if (!validator()) {
         alert("Please fill all the required fields");
@@ -196,6 +199,7 @@ function sendMessage() {
     }).catch( (err) => console.log(err));
 }
 
+/*********** Fn: Connect to New User Chat ***********/
 function connectUser() {
     if (!($('#connectToUserName').val() && $('#connectToUserName').val().trim().length > 0)) {
         alert("Please fill all the required fields");
@@ -263,15 +267,6 @@ function closeModal(modalId) {
     $('#' + modalId).modal('hide');
 }
 
-$(document).ready(() => {
-    getAllUserChatAccounts();
-    getUserChat();
-    showModal();
-    initiateSignalR();
-    addEventListeners();
-}); 
-
-
 function initiateSignalR() {
     var connection = $.hubConnection();
     connection.logging = true;
@@ -303,5 +298,13 @@ function initiateSignalR() {
 
     connection.start().done().fail(function (error) {
         console.log('Invocation of start failed. Error:' + error)
-    }).catch(err => console.error(err.toString())).then(function () {});
+    }).catch(err => console.error(err.toString())).then(function () { });
 }
+
+$(document).ready(() => {
+    getAllUserChatAccounts();
+    getUserChat();
+    showModal();
+    initiateSignalR();
+    addEventListeners();
+}); 
