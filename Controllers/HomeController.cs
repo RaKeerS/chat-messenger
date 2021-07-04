@@ -29,23 +29,9 @@ namespace Chat_Messenger.Controllers
             }
         }
 
-        //public ActionResult Index()
-        //{
-        //    ViewBag.Title = "Home Page";
-
-        //    return View();
-        //}
-
         public ActionResult HomePage()
         {
             ViewBag.Title = "Home Page";
-
-            return View();
-        }
-
-        public ActionResult RegisterLoginModal()
-        {
-            //ViewBag.Title = "Home Page";
 
             return View();
         }

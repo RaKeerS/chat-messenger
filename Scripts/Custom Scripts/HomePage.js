@@ -2,27 +2,8 @@
 var messageList = [];
 
 let commonBridge;
-
 let currentChatUserName = '';
-
 let isConversationWindowOpen = false;
-
-//function getAllUserChatAccounts() {
-//    for (i = 0; i < 11; i++) {
-//        $("#custom-table-body1").append(`
-//        <tr>
-//            <td style="padding: 3px; border-bottom: 1px solid grey">
-//                <div class="card-body dflex">
-//                    <div class="img-circle fake-img"></div>
-//                    <div class="dflexcol card-details">
-//                        <h3 class="custom-margin-block">Test Name</h3>
-//                        <label>Some random text message!</label>
-//                    </div>
-//                </div>
-//            </td>
-//        </tr>`);
-//    }
-//}
 
 function getAllUserChatAccounts() { // Gets all active Chats on the left hand side
     $("#custom-table-body1").empty();
@@ -61,34 +42,6 @@ function getUserConversationWindow() {
         </div>
     `);
 }
-
-
-//const chats = [
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Hello! Whatsup!?!' },
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'Hey there! Nothing much' },
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'How about you!?' },
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Oh, very well then!' },
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Hello! Whatsup!?!' },
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'Hey there! Nothing much' },
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'How about you!?' },
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Oh, very well then!' },
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Hello! Whatsup!?!' },
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'Hey there! Nothing much' },
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'How about you!?' },
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Oh, very well then!' },
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Hello! Whatsup!?!' },
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'Hey there! Nothing much' },
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'How about you!?' },
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Oh, very well then!' },
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Hello! Whatsup!?!' },
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'Hey there! Nothing much' },
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'How about you!?' },
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Oh, very well then!' },
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Hello! Whatsup!?!' },
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'Hey there! Nothing much' },
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'How about you!?' },
-//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Oh, very well then!' }
-//]
 
 function getUserChat() {
     let userChat = userChatAccountsList.filter((item, index) => item.userName == currentChatUserName);
@@ -186,10 +139,8 @@ function registerUser() {
         success: function () {
             getToken();
             $("#loaderClass").addClass('hide');
-            //$("#registerModal").modal('hide');
         },
         error: function (jqXHR) {
-            //$("#divError").text(jqXHR.responseText);
             alert(JSON.parse(jqXHR.responseText).error_description);
             $("#loaderClass").addClass('hide');
         }
@@ -221,14 +172,9 @@ function getToken() {
 function addEventListeners() {
     document.getElementById('messageBox').addEventListener("keyup", function (event) {
         // Number 13 is the "Enter" key on the keyboard
-        //if (event.keyCode == 13 && event.shiftKey) {
-        //    document.getElementById("d").innerHTML = "Triggered enter+shift";
-        //}
         if (event.keyCode == 13 && !event.shiftKey) {
             // Cancel the default action, if needed
             event.preventDefault();
-            // Trigger the button element with a click
-            //document.getElementById("myBtn").click();
 
             sendMessage();
         }
@@ -237,7 +183,6 @@ function addEventListeners() {
 
 function sendMessage() {
     let message = $('#messageBox').val();
-    //let messageBox = { accessToken: localStorage.getItem('access_token'), messageString: message, userName: currentChatUserName };
 
     if (!(localStorage.getItem('userName') == currentChatUserName)) {
         let currentUserChat = userChatAccountsList.find((item, index) => item.userName == currentChatUserName);
@@ -249,21 +194,6 @@ function sendMessage() {
         $('#messageBox').val('');
         getUserChat();
     }).catch( (err) => console.log(err));
-
-    //$.ajax({
-    //    url: window.location.origin + '/home/sendMessage',
-    //    method: 'POST',
-    //    data: messageBox,
-    //    success: function (jqXHR) {
-    //        let response = jqXHR[0].Value;
-    //        $('#messageBox').val('');
-    //        getUserChat();
-    //    },
-    //    error: function (jqXHR) {
-    //        let error = jqXHR;
-    //        alert(JSON.parse(jqXHR));
-    //    }
-    //});
 }
 
 function connectUser() {
@@ -302,9 +232,8 @@ function connectUser() {
             $("#loaderClass").addClass('hide');
         },
         error: function (jqXHR) {
-            alert(JSON.parse(jqXHR));
+            console.error(JSON.parse(jqXHR));
             $('#connectToUserName').val('');
-            //$("#chatConnectionModal").modal('hide');
         }
     })
 }
@@ -315,7 +244,6 @@ function startNewChat() {
 
 function openCoversation(elem) {
     $('#currentConvoUserName')[0].innerText = elem.children[0].children[0].children[1].children[0].innerText;
-    //$('#currentConvoLabel')[0].innerText = elem.children[0].children[0].children[1].children[1].innerText;
     $('#currentConvoLabel')[0].innerText = 'online';
 
     currentChatUserName = elem.children[0].children[0].children[1].children[0].innerText;
@@ -338,7 +266,6 @@ function closeModal(modalId) {
 $(document).ready(() => {
     getAllUserChatAccounts();
     getUserChat();
-    //openModal();
     showModal();
     initiateSignalR();
     addEventListeners();
@@ -352,10 +279,6 @@ function initiateSignalR() {
         console.log('We are currently experiencing difficulties with the connection.')
     });
     commonBridge = connection.createHubProxy('commonBridge');
-    //commonBridge.on('hello', () => {
-    //    console.log('Hello!!');
-    //    alert('Hello!');
-    //});
 
     commonBridge.on('messageReceived', (senderUserName, receiverUserName, message) => {
         // We sent the message to server and received the response here.
@@ -371,22 +294,14 @@ function initiateSignalR() {
                 userChatAccountsList.push({ userId: '', userName: senderUserName, message: _.cloneDeep(messageList) });
             }
 
-            // Add the message broadcasted to thus newly added User's (in left panel) message list
             let currentUserChat = userChatAccountsList.find((item, index) => item.userName == senderUserName);
             currentUserChat.message.push({ receiverUserName: receiverUserName, senderUserName: senderUserName, message: message });
 
             getAllUserChatAccounts();
         }
-        //let currentUserChat = userChatAccountsList.find((item, index) => item.userName == currentChatUserName);
-        //currentUserChat.message.push({ receiverUserName: currentChatUserName, senderUserName: localStorage.getItem('userName'), message: message });
     });
 
     connection.start().done().fail(function (error) {
         console.log('Invocation of start failed. Error:' + error)
-    }).catch(err => console.error(err.toString())).then(function () {
-        //commonBridge.invoke('hello').then(function () {
-        //    console.log('Successful!!');
-        //    alert('Successful!!');
-        //});
-    });
+    }).catch(err => console.error(err.toString())).then(function () {});
 }
