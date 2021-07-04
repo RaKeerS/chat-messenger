@@ -29,12 +29,12 @@ namespace Chat_Messenger.Controllers
             }
         }
 
-        public ActionResult Index()
-        {
-            ViewBag.Title = "Home Page";
+        //public ActionResult Index()
+        //{
+        //    ViewBag.Title = "Home Page";
 
-            return View();
-        }
+        //    return View();
+        //}
 
         public ActionResult HomePage()
         {

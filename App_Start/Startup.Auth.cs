@@ -38,7 +38,7 @@ namespace Chat_Messenger
                 TokenEndpointPath = new PathString("/Token"),
                 Provider = new ApplicationOAuthProvider(PublicClientId),
                 AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
+                AccessTokenExpireTimeSpan = TimeSpan.FromHours(8),
                 // In production mode set AllowInsecureHttp = false
                 AllowInsecureHttp = true
             };

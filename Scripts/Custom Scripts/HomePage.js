@@ -63,32 +63,32 @@ function getUserConversationWindow() {
 }
 
 
-const chats = [
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Hello! Whatsup!?!' },
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'Hey there! Nothing much' },
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'How about you!?' },
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Oh, very well then!' },
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Hello! Whatsup!?!' },
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'Hey there! Nothing much' },
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'How about you!?' },
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Oh, very well then!' },
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Hello! Whatsup!?!' },
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'Hey there! Nothing much' },
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'How about you!?' },
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Oh, very well then!' },
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Hello! Whatsup!?!' },
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'Hey there! Nothing much' },
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'How about you!?' },
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Oh, very well then!' },
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Hello! Whatsup!?!' },
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'Hey there! Nothing much' },
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'How about you!?' },
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Oh, very well then!' },
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Hello! Whatsup!?!' },
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'Hey there! Nothing much' },
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'How about you!?' },
-    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Oh, very well then!' }
-]
+//const chats = [
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Hello! Whatsup!?!' },
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'Hey there! Nothing much' },
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'How about you!?' },
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Oh, very well then!' },
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Hello! Whatsup!?!' },
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'Hey there! Nothing much' },
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'How about you!?' },
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Oh, very well then!' },
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Hello! Whatsup!?!' },
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'Hey there! Nothing much' },
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'How about you!?' },
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Oh, very well then!' },
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Hello! Whatsup!?!' },
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'Hey there! Nothing much' },
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'How about you!?' },
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Oh, very well then!' },
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Hello! Whatsup!?!' },
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'Hey there! Nothing much' },
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'How about you!?' },
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Oh, very well then!' },
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Hello! Whatsup!?!' },
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'Hey there! Nothing much' },
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '002', message: 'How about you!?' },
+//    { bearer: 'asqw23323sqw(not exactly needed)', userID: '001', message: 'Oh, very well then!' }
+//]
 
 function getUserChat() {
     let userChat = userChatAccountsList.filter((item, index) => item.userName == currentChatUserName);
@@ -352,10 +352,10 @@ function initiateSignalR() {
         console.log('We are currently experiencing difficulties with the connection.')
     });
     commonBridge = connection.createHubProxy('commonBridge');
-    commonBridge.on('hello', () => {
-        console.log('Hello!!');
-        alert('Hello!');
-    });
+    //commonBridge.on('hello', () => {
+    //    console.log('Hello!!');
+    //    alert('Hello!');
+    //});
 
     commonBridge.on('messageReceived', (senderUserName, receiverUserName, message) => {
         // We sent the message to server and received the response here.
@@ -384,9 +384,9 @@ function initiateSignalR() {
     connection.start().done().fail(function (error) {
         console.log('Invocation of start failed. Error:' + error)
     }).catch(err => console.error(err.toString())).then(function () {
-        commonBridge.invoke('hello').then(function () {
-            console.log('Successful!!');
-            alert('Successful!!');
-        });
+        //commonBridge.invoke('hello').then(function () {
+        //    console.log('Successful!!');
+        //    alert('Successful!!');
+        //});
     });
 }
