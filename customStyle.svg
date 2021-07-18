@@ -7,11 +7,9 @@
         }
       </style>
       <p>
-        This Project has Authorization implemented in it whereas the other project does titled 'chat-messenger-noauth' does not implement the same.
-        Click the following 
         <a href="https://github.com/RaKeerS/chat-messenger-noauth">
           <img class="v-align" src="https://img.shields.io/badge/Github-chat--messenger--noauth-green?label=github&amp;logo=github" alt="Chat-Messenger-Noauth-Repo" />
-        </a> to check out that repo.
+        </a>
       </p>
     </div>
    </foreignObject>
