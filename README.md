@@ -14,7 +14,7 @@ Hence, this could be called as a completely private chat which keeps no records 
 
 Below is the link to a fork of this project which works without Authorization -
 
-[![Chat-Messenger-Noauth](https://img.shields.io/badge/Github-chat--messenger--noauth-green?label=github&amp;logo=github)](https://img.shields.io/badge/Github-chat--messenger--noauth-green?label=github&amp;logo=github)
+[![Chat-Messenger-Noauth](https://img.shields.io/badge/Github-chat--messenger--noauth-green?label=Github&amp;logo=github)](https://img.shields.io/badge/Github-chat--messenger--noauth-green?label=github&amp;logo=github)
 
 ## Technologies Used
 The application is created using HTML, CSS, JS via. a ASP.NET framework for web applications. It also utilizes the Signal-R library for providing the real-time web functionality.
@@ -79,7 +79,7 @@ https://user-images.githubusercontent.com/22376097/125202742-9baf6d80-e292-11eb-
   This Project has Authorization implemented in it whereas the other project does titled 'chat-messenger-noauth' does not implement the same.
   Click the following 
   <a href="https://github.com/RaKeerS/chat-messenger-noauth">
-    <img src="https://img.shields.io/badge/Github-chat--messenger--noauth-green?label=github&amp;logo=github" alt="Chat-Messenger-Noauth-Repo">
+    <img src="https://img.shields.io/badge/Github-chat--messenger--noauth-green?label=Github&amp;logo=github" alt="Chat-Messenger-Noauth-Repo">
   </a> to check out that repo.
 </p>
 
