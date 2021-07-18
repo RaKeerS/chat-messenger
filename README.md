@@ -12,9 +12,9 @@ This web application allows multiple clients to communicate with each other real
 The application doesn't make use of any database, it's purely running on the system memory i.e. the User Accounts might be lost if the application is updated. 
 Hence, this could be called as a completely private chat which keeps no records of the recipients or the sessions or messages whatsover! 😎👥
 
-Below is the link to a fork of this project which works without Authorization -
+**Below is the link to a fork of this project which works without Authorization -**
 
-[![Chat-Messenger-Noauth](https://img.shields.io/badge/Github-chat--messenger--noauth-green?label=Github&amp;logo=github)](https://img.shields.io/badge/Github-chat--messenger--noauth-green?label=github&amp;logo=github)
+[![Chat-Messenger-Noauth](https://img.shields.io/badge/Github-chat--messenger--noauth-green?label=Github&amp;logo=github)](https://img.shields.io/badge/Github-chat--messenger--noauth-green?label=Github&amp;logo=github)
 
 ## Technologies Used
 The application is created using HTML, CSS, JS via. a ASP.NET framework for web applications. It also utilizes the Signal-R library for providing the real-time web functionality.
