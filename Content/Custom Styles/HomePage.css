@@ -1,5 +1,4 @@
 ﻿body {
-    /*background-color: red;*/
     margin: 0px;
     font-family: 'Roboto Slab', serif;
 }
@@ -48,6 +47,11 @@
     padding-right: 2px;
 }
 
+.p-15 {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
 .custom-navbar {
     height: 100%;
     margin: 2px;
@@ -55,46 +59,58 @@
     background-color: #4CB5F5;
 }
 
+.active {
+    display: flex !important;
+    width: 100% !important;
+}
+
 .title {
-   /* border: 1px solid #ddd;*/
     color: #555555;
     cursor: default;
-    /*background-color: #fff;*/
     border-radius: 4px 4px 0 0;
     text-align: center;
     height: 100%;
     position: relative;
     display: block;
-/*    padding: 10px 15px;*/
     margin: 0;
     font-family: 'Ubuntu', cursive;
     font-size: x-large;
-   /* background-color: #4CB5F5;*/
     color: white;
     text-shadow: 3px 3px 3px black;
+    width: 100%;
+}
+
+.info, .name {
+    float: right;
+    font-size: 10px;
+    width: auto;
 }
 
 .left-panel {
-    /*flex: 20%;*/
     flex: 5%;
     height: 100%;
     background-color: #375E97;
     overflow: auto;
+    padding: 4px;
+    display: flex;
+    width: 100%;
 }
 
 .right-panel {
-    /*flex: 80%;*/
     flex: 55%;
     height: 100%;
     background-color: #d7d7e8;
     display: flex;
     flex-flow: column nowrap;
+    display: flex;
+    width: 75%;
 }
 
 .card-header {
     width: 100%;
     padding: 0px;
     flex-wrap: nowrap;
+    height: auto;
 }
 
 .card-body {
@@ -102,15 +118,16 @@
     padding: 2px;
     flex-wrap: nowrap;
     font-family: 'Ubuntu', sans-serif;
+    height: 60px;
 }
 
 .fake-img {
     background-color: dimgrey;
-    /*flex: 12% 1;*/
-    flex: 3% 1;
-    height: 67px;
+    /*flex: 3% 1;*/
+    /*height: 67px;*/
     align-self: center;
     border-radius: 50%;
+    width: 55px;
 }
 
 .image {
@@ -125,9 +142,11 @@
 }
 
 .card-details {
-    padding: 7px;
-    flex: 60% ;
+    padding: 2px 7px;
+    flex: 60%;
     margin-left: 4px;
+    flex-wrap: nowrap;
+    width: 60%;
 }
 
 .custom-margin-block {
@@ -135,12 +154,17 @@
     margin-block-end: 4px;
 }
 
+.custom-inputdiv {
+    height: 100%;
+    padding: 5px;
+    align-items: center;
+}
+
 .custom-inputtextarea {
-    border-radius: 11px;
-    /*box-shadow: 2px 2px 2px #8c8383, -2px -2px 2px #8c8383, -2px 2px 2px #8c8383, 2px -2px 2px #8c8383;*/
+    border-radius: 15px;
     border: 0px;
     flex: 90%;
-    padding: 14px 14px 10px 14px;
+    padding: 13px 14px 10px 14px;
     border: 1px solid #292828;
     
     font-size: 15px;
@@ -150,26 +174,38 @@
 }
 
     .custom-inputtextarea:focus, .custom-inputtextarea:active:focus, .custom-inputtextarea:focus-visible {
-        border-radius: 10px;
-        /* border: 1px solid black;*/
+        border-radius: 15px;
         outline: 0px;
     }
 
 .custom-button {
     flex: 2%;
-    height: 100%;
-    margin-left: 4px;
+/*    margin-left: 4px;*/
     border-radius: 10px;
     border: 0px;
-    /*box-shadow: 2px 2px 2px #8c8383, -2px -2px 2px #8c8383, -2px 2px 2px #8c8383, 2px -2px 2px #8c8383;*/
     font-size: 2em;
     background: transparent;
+/*    height: 75%;*/
+    height: 85%;
+    margin-left: 10px;
 }
 
     .custom-button:focus, .custom-button:active:focus, .custom-button:focus-visible {
         border-radius: 10px;
-       /* border: 1px solid black;*/
         outline: 0px;
+    }
+
+.custom-row1 {
+    /*padding: 3px;*/
+    /*border-bottom: 1px solid grey;*/
+    border-bottom: 4px solid #375E97;
+    border-radius: 15px;
+    padding: 4px 6px;
+    width: 100%;
+}
+
+    .custom-row1 > .card-body {
+        color: black;
     }
 
 input:focus-visible {
@@ -178,13 +214,28 @@ input:focus-visible {
     outline: 0px;
 }
 
+#custom-table {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+#custom-table-body1 {
+    width: 100%;
+}
+
 #custom-table-body2 tr td {
-    /* padding: 10px;*/
     padding: 5px;
 }
 
 .custom-header {
     font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 75%;
 }
 
 .custom-label {
@@ -200,7 +251,6 @@ input:focus-visible {
 }
 
 .custom-card-body {
-    /*    width: 100%;*/
     display: flex;
     flex-flow: row wrap;
     border: 1px solid #717171;
@@ -213,7 +263,6 @@ input:focus-visible {
 
 #cardFooter {
     background-color: #6dce1a;
-   /* background-color: #3F681C;*/
 }
 
 .modal-dialog {
@@ -256,7 +305,6 @@ input:focus-visible {
 
 .floating-div {
     top: 90%;
-    /* left: 14%;*/
     left: 20%;
     position: absolute;
     cursor: pointer !important;
@@ -276,8 +324,21 @@ input:focus-visible {
 
 .clickable {
     cursor: pointer !important;
-    background-color: #FB6542;
+    /*    background-color: #FB6542;*/
+    /*   background-color: yellowgreen;*/
+    /*background-color: #d2cbd2;*/
+    background-color: #f44336;
+    display: flex;
+    border-radius: 15px;
 }
+
+    .clickable:hover {
+        background-color: #ccc;
+    }
+
+/*    .clickable:focus, .clickable:active, .clickable:focus-visible {
+        background-color: #ffc107 !important;
+    }*/
 
 @media only screen and (max-width: 1300px) {
     .card-details {
@@ -382,6 +443,12 @@ input:focus-visible {
     }
 }
 
+@media only screen and (max-width: 1020px) {
+    .main {
+        width: 1000px;
+    }
+}
+
 @media only screen and (max-width: 980px) {
     .right-panel {
         flex: 52%;
@@ -469,14 +536,6 @@ input:focus-visible {
 }
 
 @media only screen and (max-width: 750px) {
-/*    .card-details {
-        flex: 36%;
-    }
-
-    #cardDetails {
-        flex: 78%;
-    }
-*/
     .right-panel {
         flex: 48.5%;
     }
@@ -508,10 +567,6 @@ input:focus-visible {
     .main {
         width: 700px;
     }
-
-/*    .floating-div {
-        left: 20%;
-    }*/
 }
 
 @media only screen and (max-width: 699px) {
@@ -527,58 +582,3 @@ input:focus-visible {
         height: 88.6vh;
     }
 }
-
-    /*@media only screen and (max-width: 670px) {
-    .card-details {
-        flex: 26%;
-    }
-
-    #cardDetails {
-        flex: 74%;
-    }
-}
-
-@media only screen and (max-width: 650px) {
-    .card-details {
-        flex: 30%;
-    }
-
-    #cardDetails {
-        flex: 70%;
-    }
-}
-
-
-@media only screen and (max-width: 600px) {
-    .card-details {
-        flex: 24%;
-    }
-
-    #cardDetails {
-        flex: 68%;
-    }
-}
-
-@media only screen and (max-width: 570px) {
-    .card-details {
-        flex: 20%;
-    }
-
-    #cardDetails {
-        flex: 66%;
-    }
-}
-
-@media only screen and (max-width: 550px) {
-    .card-details {
-        flex: 16%;
-    }
-
-    #cardDetails {
-        flex: 64%;
-    }
-
-    .right-panel {
-        flex: 42%;
-    }
-}*/

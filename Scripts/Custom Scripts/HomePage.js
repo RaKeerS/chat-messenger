@@ -5,14 +5,16 @@ let commonBridge;
 let currentChatUserName = '';
 let isConversationWindowOpen = false;
 
+let currentChatId;
+
 /*********** Fn: Gets all active Chats on the left hand side ***********/
 function getAllUserChatAccounts() { 
     $("#custom-table-body1").empty();
     let chatAccounts = userChatAccountsList;
     for (i = 0; i < chatAccounts.length; i++) {
         $("#custom-table-body1").append(`
-        <tr class="clickable" onclick="openCoversation(this)">
-            <td style="padding: 3px; border-bottom: 1px solid grey">
+        <tr id="${'clickable-row-' + i}" class="clickable" onclick="openCoversation(this)">
+            <td class="custom-row1">
                 <div class="card-body dflex">
                     <div class="img-circle fake-img">
                         <img src="/assets/chat-avatar.png" class="image" alt="chat-avatar" />
@@ -24,6 +26,10 @@ function getAllUserChatAccounts() {
                 </div>
             </td>
         </tr>`);
+    }
+
+    if (currentChatId) {
+        $(currentChatId).css('background-color', '#ffc107');
     }
 
     if (isConversationWindowOpen) {
@@ -90,7 +96,7 @@ function openModal() {
 }
 
 function showModal() {
-    if (localStorage.getItem('access_token')) {
+    if (localStorage.getItem('expires') != undefined && localStorage.getItem('expires') != 'undefined') {
         let expiryDate = new Date(localStorage.getItem('expires'));
         let currentDate = new Date();
         if (expiryDate.getTime() < currentDate.getTime()) {
@@ -144,7 +150,7 @@ function registerUser() {
             $("#loaderClass").addClass('hide');
         },
         error: function (jqXHR) {
-            alert(JSON.parse(jqXHR.responseText).error_description);
+            alert(JSON.parse(jqXHR.responseText).modelState.error_description.toString());
             $("#loaderClass").addClass('hide');
         }
     });
@@ -173,7 +179,7 @@ function getToken() {
 }
 
 function addEventListeners() {
-    document.getElementById('messageBox').addEventListener("keyup", function (event) {
+    document.getElementById('messageBox').addEventListener('keyup', function (event) {
         // Number 13 is the "Enter" key on the keyboard
         if (event.keyCode == 13 && !event.shiftKey) {
             // Cancel the default action, if needed
@@ -181,7 +187,21 @@ function addEventListeners() {
 
             sendMessage();
         }
-    }); 
+    });
+
+    document.getElementById('connectToUserName').addEventListener('keyup', function (event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode == 13) {
+            connectUser();
+        }
+    });
+}
+
+function connectToUser(event) {
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode == 13) {
+        connectUser();
+    }
 }
 
 function sendMessage() {
@@ -193,7 +213,6 @@ function sendMessage() {
     }
 
     commonBridge.invoke('sendMessageTo', localStorage.getItem('userName'), currentChatUserName, message).then(() => {
-        console.log('Invoked sendMessageTo successfully!');
         $('#messageBox').val('');
         getUserChat();
     }).catch( (err) => console.log(err));
@@ -224,20 +243,35 @@ function connectUser() {
     $.ajax({
         url: window.location.origin + '/home/startNewChat',
         method: 'POST',
+        headers: {
+            'authorization': 'bearer ' + localStorage.getItem('access_token')
+        },
         data: {
             userName: $('#connectToUserName').val()
         },
         success: function (jqXHR) {
-            let response = jqXHR;
-            userChatAccountsList.push({ userId: jqXHR[0].Value, userName: jqXHR[1].Value, message: _.cloneDeep(messageList) });
+            if (jqXHR[0].Key == 'error_description') {
+                $("#loaderClass").addClass('hide');
+                $('#connectToUserName').val('')
+                alert(jqXHR[1].Value);
+                return;
+            }
+            userChatAccountsList.push({ userId: '', userName: jqXHR[1].Value, message: _.cloneDeep(messageList) });
             getAllUserChatAccounts();
             $('#connectToUserName').val('')
             closeModal('chatConnectionModal');
             $("#loaderClass").addClass('hide');
         },
         error: function (jqXHR) {
-            console.error(JSON.parse(jqXHR));
-            $('#connectToUserName').val('');
+            $("#loaderClass").addClass('hide');
+            if (jqXHR.status = 401) {
+                console.error('Access Denied! Please try signing in again!');
+            }
+            else {
+                console.error(JSON.parse(jqXHR));
+                $('#connectToUserName').val('');
+            }
+
         }
     })
 }
@@ -247,6 +281,9 @@ function startNewChat() {
 }
 
 function openCoversation(elem) {
+    currentChatId = '#'+elem.id;
+    $('.clickable').css('background-color', '#f44336');
+    $(currentChatId).css('background-color', '#ffc107');
     $('#currentConvoUserName')[0].innerText = elem.children[0].children[0].children[1].children[0].innerText;
     $('#currentConvoLabel')[0].innerText = 'online';
 
@@ -277,7 +314,6 @@ function initiateSignalR() {
 
     commonBridge.on('messageReceived', (senderUserName, receiverUserName, message) => {
         // We sent the message to server and received the response here.
-        console.log('messageReceived', senderUserName, receiverUserName, message);
 
         if (localStorage.getItem('userName') == receiverUserName) {
             // Create list of Users on left panel
@@ -285,7 +321,7 @@ function initiateSignalR() {
             if (userChatAccountsList.length == 0) {
                 userChatAccountsList.push({ userId: '', userName: senderUserName, message: _.cloneDeep(messageList) });
             }
-            else if (userChatAccountsList.length > 0 && userChatAccountsList.find(x => x.userName == senderUserName).length == 0) {
+            else if (userChatAccountsList.length > 0 && userChatAccountsList.find(x => x.userName == senderUserName) == undefined) {
                 userChatAccountsList.push({ userId: '', userName: senderUserName, message: _.cloneDeep(messageList) });
             }
 
@@ -301,7 +337,15 @@ function initiateSignalR() {
     }).catch(err => console.error(err.toString())).then(function () { });
 }
 
+function getUserName() {
+    if (localStorage.getItem('userName')) {
+        $('#nameOfUser').text(localStorage.getItem('userName'));
+        $('#title').css('margin-left', '125px');
+    }
+}
+
 $(document).ready(() => {
+    getUserName();
     getAllUserChatAccounts();
     getUserChat();
     showModal();

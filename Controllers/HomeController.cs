@@ -45,26 +45,38 @@ namespace Chat_Messenger.Controllers
             return Json(response);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<JsonResult> startNewChat(string userName)
         {
             dynamic response = new ExpandoObject();
-            IdentityUser user = await UserManager.FindByNameAsync(userName);
-
-            if (user == null)
+            try
             {
-                response.message = "No User found!!!";
-                return Json(response);
+	            IdentityUser user = await UserManager.FindByNameAsync(userName);
+	
+	            if (user == null)
+	            {
+	                response.message = "No User found!!!";
+	                return Json(response);
+	            }
+	            else {
+	                response.userId = user.Id;
+	                response.userName = user.UserName;
+	                return Json(response);
+	            }
             }
-            else {
-                response.userId = user.Id;
-                response.userName = user.UserName;
+	        catch (Exception ex)
+            {
+                response.error_description = ex.Message;
+                response.message = $"No User found with the User Name {userName}!";
                 return Json(response);
+                throw;
             }
         }
     }
 
-    public struct messageBody {
+    public struct messageBody
+    {
         public string accessToken { get; set; }
         public string messageString { get; set; }
     }
