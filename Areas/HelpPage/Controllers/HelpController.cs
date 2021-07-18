@@ -1,8 +1,8 @@
+using Chat_Messenger.Areas.HelpPage.ModelDescriptions;
+using Chat_Messenger.Areas.HelpPage.Models;
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using Chat_Messenger.Areas.HelpPage.ModelDescriptions;
-using Chat_Messenger.Areas.HelpPage.Models;
 
 namespace Chat_Messenger.Areas.HelpPage.Controllers
 {

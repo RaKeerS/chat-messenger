@@ -1,10 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.SignalR;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using Microsoft.AspNet.SignalR;
 
 namespace Chat_Messenger.Hubs
 {

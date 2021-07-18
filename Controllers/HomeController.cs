@@ -3,7 +3,6 @@ using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
@@ -52,20 +51,21 @@ namespace Chat_Messenger.Controllers
             dynamic response = new ExpandoObject();
             try
             {
-	            IdentityUser user = await UserManager.FindByNameAsync(userName);
-	
-	            if (user == null)
-	            {
-	                response.message = "No User found!!!";
-	                return Json(response);
-	            }
-	            else {
-	                response.userId = user.Id;
-	                response.userName = user.UserName;
-	                return Json(response);
-	            }
+                IdentityUser user = await UserManager.FindByNameAsync(userName);
+
+                if (user == null)
+                {
+                    response.message = "No User found!!!";
+                    return Json(response);
+                }
+                else
+                {
+                    response.userId = user.Id;
+                    response.userName = user.UserName;
+                    return Json(response);
+                }
             }
-	        catch (Exception ex)
+            catch (Exception ex)
             {
                 response.error_description = ex.Message;
                 response.message = $"No User found with the User Name {userName}!";
