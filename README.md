@@ -14,7 +14,7 @@ Hence, this could be called as a completely private chat which keeps no records 
 
 **Below is the link to a fork of this project which works without Authorization -**
 
-[![Chat-Messenger-Noauth](https://img.shields.io/badge/Github-chat--messenger--noauth-green?label=Github&amp;logo=github)](https://img.shields.io/badge/Github-chat--messenger--noauth-green?label=Github&amp;logo=github)
+[![Chat-Messenger-Noauth](https://img.shields.io/badge/Github-chat--messenger--noauth-green?label=Github&amp;logo=github)](https://github.com/RaKeerS/chat-messenger-noauth)
 
 ## Technologies Used
 The application is created using HTML, CSS, JS via. a ASP.NET framework for web applications. It also utilizes the Signal-R library for providing the real-time web functionality.
